@@ -1,0 +1,160 @@
+Get all user:
+
+# Write your query or mutation here
+query getAllUsers{
+  users{
+    _id
+    email
+    profilePicture
+    address{
+      city
+      country
+      area
+    }
+    posts{
+      title
+      content
+      tags
+    }
+    comments{
+      _id
+      content
+      postid
+      author
+    }
+    likes{
+      _id
+      postid
+      author
+    }
+    following{
+      firstName
+      _id
+      lastName
+    }
+    followers{
+      firstName
+      _id
+      lastName
+    }
+    
+  }
+}
+
+Create user: 
+
+mutation createUser($userNew:UserInput!){
+  user:signupUser(userNew:$userNew){
+    _id
+    firstName
+    lastName
+    email
+    profilePicture
+  }
+}
+
+{
+  "userNew": {
+    "firstName": "Parth",
+    "lastName": "Savaliya",
+    "email": "p@p.com",
+    "password": "p@p.com",
+    "profilePicture": "https://www.google.com/url?sa=i&url=https%3A%2F%2Fpixabay.com%2Fimages%2Fsearch%2Fuser%2F&psig=AOvVaw3IcileSh9YgUYPVF73chM6&ust=1704957712416000&source=images&cd=vfe&ved=0CBMQjRxqFwoTCODTyMek0oMDFQAAAAAdAAAAABAE"
+  }
+}
+
+Login user:
+
+mutation loginUser($userSignIn:UserSignInInput!){
+  	signInUser(userSignIn:$userSignIn){
+    token
+  }
+}
+
+{
+  "userSignIn": {
+    "email": "p@p.com",
+    "password": "p@p.com"
+  }
+}
+
+get all post:
+
+query getAllPost{
+  posts{
+    _id
+    content
+    title
+    tags
+    comments{
+      _id
+      content
+      author
+    }
+  }
+}
+
+get all comment:
+
+query getAllComment {
+  comments{
+    _id
+    author
+    postid
+  }
+}
+
+
+create comment:
+
+mutation createComment($userComment:CommentInput!){
+  createComment(userComment:$userComment){
+     _id
+    content
+    author
+    postid
+  }
+}
+
+{
+  "userComment": {
+    "content": "This is my first Comment",
+    "postId": "659e7b3d8146bfbffea87bf2"
+  }
+}
+
+create post:
+
+mutation createPost($userPost:PostInput!){
+  createPost(userPost:$userPost){
+    _id
+    title
+    content
+    tags
+  }
+}
+
+{
+  "userPost": {
+    "title": "This is my first post",
+    "content": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+    "tags": "picnic"
+  }
+}
+
+
+create like:
+
+mutation createLike($userLike:LikeInput!){
+  createLike(userLike:$userLike) {
+    _id
+    author
+    postid
+  }
+}
+
+{
+  "userLike": {
+    "postId": "659e7b3d8146bfbffea87bf2"
+  }
+}

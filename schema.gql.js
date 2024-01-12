@@ -90,6 +90,7 @@ const typeDefs = gql`
 
    type Token{
     token:String
+    user:User
    }
 
    input UserSignInInput {

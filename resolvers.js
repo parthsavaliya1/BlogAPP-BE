@@ -54,8 +54,12 @@ const resolvers = {
             }
 
             const token = jwt.sign({userId:isCheckUser?._id},jwtSecret)
-
-            return {token}
+            const user = {
+                token:token, 
+                user:isCheckUser?._doc
+            }
+            console.log(user)
+            return {...user}
 
         },
         createAddress: async(_,{userAddress}, {userId}) => {

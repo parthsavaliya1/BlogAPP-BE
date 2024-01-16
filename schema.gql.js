@@ -40,6 +40,7 @@ const typeDefs = gql`
     content:String
     tags:String
     author:ID
+    createdAt:String
     comments:[Comment]
    }
 

@@ -10,7 +10,7 @@ const postSchema= new mongoose.Schema({
         require:true,
     },
     tags: {
-        type:String
+        type:[String]
     },
     author: {
         type:mongoose.Schema.Types.ObjectId,

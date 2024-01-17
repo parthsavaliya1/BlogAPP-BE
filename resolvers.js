@@ -87,10 +87,13 @@ const resolvers = {
                 throw new Error('You must be login first')
             }
 
-            const newPost = new Post({
-                ...userPost,
-                author:userId
-              })
+           
+    
+          const newPost = new Post({
+            ...userPost,
+            tags: userPost.tags || [],  // Ensure tags is an array
+            author: userId,
+          });
   
               return await newPost.save()
         },

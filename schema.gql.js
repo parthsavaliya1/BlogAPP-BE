@@ -39,7 +39,7 @@ const typeDefs = gql`
     _id:ID
     title:String
     content:String
-    tags:String
+    tags:[String]
     author:ID
     createdAt:String
     comments:[Comment]
@@ -74,7 +74,7 @@ const typeDefs = gql`
    input PostInput{
     title:String
     content:String
-    tags:String
+    tags:[String]
    }
 
    input CommentInput{

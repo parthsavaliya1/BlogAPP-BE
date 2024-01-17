@@ -8,6 +8,7 @@ const typeDefs = gql`
     posts:[Post]
     comments:[Comment]
     likes:[Like]
+    postByUser:[Post]
    }
 
    type User{

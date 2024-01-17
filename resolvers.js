@@ -15,7 +15,14 @@ const resolvers = {
         address:async () => await Address.find({}),
         posts: async () =>await Post.find({}),
         comments: async()=> await Comment.find({}),
-        likes: async () => await Like.find({})
+        likes: async () => await Like.find({}),
+        postByUser: async (_, {}, { userId }) => {
+            if (!userId) {
+                throw new Error('You must be logged in to retrieve posts.');
+            }
+
+            return await Post.find({ author: userId });
+        },
     },
     User:{
         address:async(users) => await Address?.find({by:users?._id}),

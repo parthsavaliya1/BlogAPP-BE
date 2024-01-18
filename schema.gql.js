@@ -100,6 +100,7 @@ const typeDefs = gql`
    input UserSignInInput {
     email:String
     password:String
+    authMethod: String
    }
 
    input UserInput{

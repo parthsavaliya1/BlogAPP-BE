@@ -1,23 +1,24 @@
 const mongoose = require('mongoose');
 
-
 const userSchema = new mongoose.Schema({
     firstName:{
         type:String,
-        require:true
+        required:true
     },
     lastName:{
         type:String,
-        require:true,
+        required:true,
     },
     email:{
         type:String,
-        require:true,
+        required:true,
         unique:true
     },
     password: {
         type:String,
-        require:true
+        required: function() {
+            return this.authMethod === "email";
+        }
     },
     profilePicture: {
         type:String
@@ -30,8 +31,13 @@ const userSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User'
     }],
-})
+    authMethod: {
+        type: String,
+        enum: ['email', 'google'],
+        required: true
+    }
+});
 
-const User = mongoose.model('User',userSchema)
+const User = mongoose.model('User', userSchema);
 
-module.exports=User
+module.exports = User;

@@ -34,19 +34,23 @@ const resolvers = {
         comments: async (posts) => await Comment?.find({postid:posts?._id})
     },
     Mutation:{
-        signupUser:async(_,{userNew})=> {
-            const isUserExist = await User.findOne({email:userNew.email})
-            console.log(isUserExist)
-            if(isUserExist) {
-                throw new Error('User Already Exist with same email!!')
+        signupUser: async (_, { userNew }) => {
+            const { email, password,authMethod } = userNew;
+            
+            if (authMethod === "email" && (!password || password.trim() === "")) {
+              throw new Error("Password is required for email sign-up");
             }
-            const hashedPassword = await bcrypt.hash(userNew.password,12);
+      
+            const hashedPassword = password ? await bcrypt.hash(password, 12) : null;
+      
             const newUser = new User({
-                ...userNew,
-                password:hashedPassword
-            })
-            return await newUser.save()
-        },
+              ...userNew,
+              password: hashedPassword,
+              authMethod,
+            });
+      
+            return await newUser.save();
+          },
 
         signInUser:async (_, {userSignIn}) => {
             const isCheckUser = await User.findOne({email:userSignIn.email});

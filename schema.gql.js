@@ -17,12 +17,14 @@ const typeDefs = gql`
     lastName:String
     email:String
     profilePicture:String
+    password:String
     following:[User]
     followers:[User]
     address:[Address]
     posts:[Post]
     comments:[Comment]
     likes:[Like]
+    authMethod:String
    }
 
    type Address{
@@ -106,6 +108,7 @@ const typeDefs = gql`
     email:String
     password:String
     profilePicture:String
+    authMethod:String
    }
 `
 
